@@ -65,7 +65,7 @@
     </audio>
   </div>
   <div class="bouquet" aria-hidden="true">🌷💗🌷</div>
-  <h1>Hey, you…</h1>
+  <h1>Hey, Manuu…</h1>
   <p class="intro">I made a tiny little corner of the internet just for you.<br>There’s a question I’ve been wanting to ask. 💌</p>
 
   <section class="card" id="questionCard">
@@ -126,7 +126,15 @@
   noBtn.addEventListener('pointerdown', (e) => { e.preventDefault(); dodgeNo(); });
   noBtn.addEventListener('click', (e) => { e.preventDefault(); dodgeNo(); });
 
-  const loveSong = document.getElementById('loveSong');
+
+  const backgroundPhoto = document.querySelector('.photo-bg img');
+  if (backgroundPhoto) {
+    backgroundPhoto.addEventListener('error', () => {
+      musicNote.textContent = 'Photo not loading — check her-photo.jpeg filename';
+    });
+  }
+
+    const loveSong = document.getElementById('loveSong');
   const musicToggle = document.getElementById('musicToggle');
   const musicNote = document.getElementById('musicNote');
   musicToggle.addEventListener('click', async () => {
