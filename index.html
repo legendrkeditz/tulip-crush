@@ -16,10 +16,20 @@
       radial-gradient(ellipse at 90% 70%, rgba(255,183,199,.55), transparent 40%),
       linear-gradient(135deg,#fff2ed 0%,#ffdce6 48%,#fff0e8 100%);
   }
-  .petals { position:fixed; inset:0; overflow:hidden; pointer-events:none; z-index:0; }
+  .photo-bg {
+    position:fixed; inset:-8px; z-index:0; pointer-events:none;
+    background-image:url("her-photo.jpeg");
+    background-size:cover; background-position:center 35%; background-repeat:no-repeat;
+    filter:blur(3px); transform:scale(1.025);
+  }
+  .photo-bg::after {
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(135deg,rgba(255,238,243,.76),rgba(255,213,226,.66) 52%,rgba(255,239,230,.76));
+  }
+  .petals { position:fixed; inset:0; overflow:hidden; pointer-events:none; z-index:1; }
   .petal { position:absolute; top:-30px; opacity:.6; animation:fall linear infinite; }
   @keyframes fall { to { transform:translateY(110vh) rotate(400deg); } }
-  .wrap { position:relative; z-index:1; width:min(760px,92vw); margin:0 auto; padding:26px 0 34px; text-align:center; }
+  .wrap { position:relative; z-index:2; width:min(760px,92vw); margin:0 auto; padding:26px 0 34px; text-align:center; }
   .eyebrow { letter-spacing:.22em; text-transform:uppercase; font:600 11px Arial,sans-serif; color:#a54a62; }
   .bouquet { font-size:clamp(45px,10vw,76px); line-height:1.25; filter:drop-shadow(0 7px 8px #d96e8640); margin:12px 0 2px; }
   h1 { font-size:clamp(36px,8vw,62px); font-weight:normal; font-style:italic; margin:10px 0; line-height:1.06; }
@@ -49,6 +59,7 @@
 </style>
 </head>
 <body>
+<div class="photo-bg" aria-hidden="true"></div>
 <div class="petals" id="petals"></div>
 <main class="wrap">
   <div class="eyebrow">A little question from me</div>
