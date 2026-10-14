@@ -16,6 +16,35 @@
       radial-gradient(ellipse at 90% 70%, rgba(255,183,199,.55), transparent 40%),
       linear-gradient(135deg,#fff2ed 0%,#ffdce6 48%,#fff0e8 100%);
   }
+
+  .photo-bg {
+    position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none;
+    background:#f6c9d7;
+  }
+  .photo-bg img {
+    display:block; width:100%; height:100%;
+    object-fit:cover; object-position:center 24%;
+    filter:blur(1.5px); transform:scale(1.025);
+  }
+  .photo-bg::after {
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg,
+      rgba(255,238,243,.20) 0%,
+      rgba(255,213,226,.30) 50%,
+      rgba(255,239,230,.42) 100%);
+  }
+  .petals { z-index:1; }
+  .wrap { z-index:2; }
+  @media (max-width:600px) {
+    .photo-bg img { object-position:center 22%; filter:blur(1.2px); }
+    .photo-bg::after {
+      background:linear-gradient(180deg,
+        rgba(255,238,243,.18) 0%,
+        rgba(255,224,233,.30) 48%,
+        rgba(255,244,237,.45) 100%);
+    }
+  }
+
   .petals { position:fixed; inset:0; overflow:hidden; pointer-events:none; z-index:0; }
   .petal { position:absolute; top:-30px; opacity:.6; animation:fall linear infinite; }
   @keyframes fall { to { transform:translateY(110vh) rotate(400deg); } }
@@ -54,6 +83,7 @@
 </style>
 </head>
 <body>
+<div class="photo-bg" aria-hidden="true"><img src="./her-photo.jpeg" alt=""></div>
 <div class="petals" id="petals"></div>
 <main class="wrap">
   <div class="eyebrow">A little question from me</div>
@@ -127,14 +157,7 @@
   noBtn.addEventListener('click', (e) => { e.preventDefault(); dodgeNo(); });
 
 
-  const backgroundPhoto = document.querySelector('.photo-bg img');
-  if (backgroundPhoto) {
-    backgroundPhoto.addEventListener('error', () => {
-      musicNote.textContent = 'Photo not loading — check her-photo.jpeg filename';
-    });
-  }
-
-    const loveSong = document.getElementById('loveSong');
+  const loveSong = document.getElementById('loveSong');
   const musicToggle = document.getElementById('musicToggle');
   const musicNote = document.getElementById('musicNote');
   musicToggle.addEventListener('click', async () => {
